@@ -32,11 +32,27 @@ dbConnection()
 /* ------------------------------------------------------- */
 // Middlewares:
 
+//Accept JSON - Gelen veriyi objeye cevirir ve req.body ile bize geri verir
+app.use(express.json())
+
+//Run Logger:
+app.use(require('./src/middlewares/logger'))        
+
+//res.getModelList()
+app.use(require('./src/middlewares/findSearchSortPage'))
+
 
 
 /* ------------------------------------------------------- */
 // Routes:
-
+app.all('/', (req, res)=>{
+    res.send({
+        error:false,
+        message:'Welcome to Pizza API',
+        isLogin:req.isLogin,
+        user:req.user
+    })
+})
 
 
 /* ------------------------------------------------------- */
