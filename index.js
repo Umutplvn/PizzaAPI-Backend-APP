@@ -55,6 +55,10 @@ app.all('/', (req, res)=>{
 })
 
 
+app.use('/users', require('./src/routes/user'))
+
+
+
 /* ------------------------------------------------------- */
 
 // errorHandler:
