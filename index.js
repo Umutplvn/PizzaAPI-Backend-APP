@@ -55,7 +55,8 @@ app.all('/', (req, res)=>{
 })
 
 
-
+// auth:
+app.use('/auth', require('./src/routes/auth'))
 // user:
 app.use('/users', require('./src/routes/user'))
 // order:
