@@ -5,7 +5,7 @@
 // Auth Controller:
 
 const jwt = require('jsonwebtoken')
-const setToken = require('../helpers/setToken')
+const setToken = require('../helpers/setToken') // Hem access hemde refresh tokeni alabilmek icin auth(controllers) icin yazilan alternatif fonksiyon
 
 const User = require('../models/user')
 
@@ -52,25 +52,28 @@ module.exports = {
                     
                     //* Ustteki veriyi asagida data ve send icinde toparlamis olduk 
 
-                    const data = {
-                        access: user.toJSON(),
-                        refresh: { _id: user._id, password: user.password },
-                        shortExpiresIn: '10m',   //* 
-                        longExpiresIn: '3d'
-                    }
+                    // const data = {
+                    //     access: user.toJSON(),
+                    //     refresh: { _id: user._id, password: user.password },
+                    //     shortExpiresIn: '10m',   //* 
+                    //     longExpiresIn: '3d'
+                    // }
 
-                    res.send({
-                        error: false,
-                        token: {
-                            access: jwt.sign(data.access, process.env.ACCESS_KEY, { expiresIn: data.shortExpiresIn }),
-                            refresh: jwt.sign(data.refresh, process.env.REFRESH_KEY, { expiresIn: data.longExpiresIn }),
-                        }
-                    })
+                    // res.send({
+                    //     error: false,
+                    //     token: {
+                    //         access: jwt.sign(data.access, process.env.ACCESS_KEY, { expiresIn: data.shortExpiresIn }),
+                    //         refresh: jwt.sign(data.refresh, process.env.REFRESH_KEY, { expiresIn: data.longExpiresIn }),
+                    //     }
+                    // })
 
-                    res.send({      //jwt.io dan sifrelenmis donutu kontrol edebilirsin
-                        error: false,
-                        token: setToken(user)
-                    })
+
+                    //! Yukaridaki kod blogu helpers.setToken.js fonksiyonu sayesinde bu hale donustu.
+                 
+                  res.send({
+                    error:false,
+                    token:setToken(user)
+                  })
 
                 } else {
 
@@ -145,6 +148,9 @@ module.exports = {
                                 //         refresh: null    //refresh yaparaken refresh token yollamaya gerek yok - 3 gun sonra tekrar giris yapilmasi gerekir. refresh tokende versek kullanici suresiz olarak acik kalir
                                 //     }
                                 // })
+
+                            //! Yukaridaki kod blogu helpers.setToken.js fonksiyonu sayesinde bu hale donustu.
+
 
                                 res.send({
                                     error: false,

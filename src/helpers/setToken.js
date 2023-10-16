@@ -4,22 +4,21 @@
 ------------------------------------------------------- */
 // $ npm i jsonwebtoken
 // setToken(userData:object, isRefresh?:boolean):
+// Hem access hemde refresh tokeni alabilmek icin auth(controllers) icin yazilan alternatif fonksiyon
 
 const jwt = require('jsonwebtoken')
 
 module.exports = function (userData, isRefresh = false) {
 
     const data = {
-        access: userData,
+        access: userData.toJSON(),
         refresh: { _id: userData._id, password: userData.password },
         shortExpiresIn: '10m',
         longExpiresIn: '3d',
     }
 
     return {
-        token: {
             access: jwt.sign(data.access, process.env.ACCESS_KEY, { expiresIn: data.shortExpiresIn }),
             refresh: (isRefresh ? null : jwt.sign(data.refresh, process.env.REFRESH_KEY, { expiresIn: data.longExpiresIn }))
-        }
     }
 }

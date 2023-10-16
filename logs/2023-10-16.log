@@ -1,0 +1,3 @@
+::ffff:127.0.0.1 - - [16/Oct/2023:04:13:21 +0000] "POST /auth/login HTTP/1.1" 200 819 "-" "PostmanRuntime/7.33.0"
+::ffff:127.0.0.1 - - [16/Oct/2023:04:13:46 +0000] "POST /auth/refresh HTTP/1.1" 200 545 "-" "PostmanRuntime/7.33.0"
+::ffff:127.0.0.1 - - [16/Oct/2023:04:13:47 +0000] "POST /auth/refresh HTTP/1.1" 200 545 "-" "PostmanRuntime/7.33.0"
