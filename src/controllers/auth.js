@@ -13,6 +13,7 @@ module.exports = {
 
     login: async (req, res) => {
         /*
+        not ekledik
             #swagger.tags = ['Authentication']
             #swagger.summary = 'Login'
             #swagger.description = 'Login with username and password'
