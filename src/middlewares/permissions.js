@@ -8,6 +8,7 @@ module.exports = {
 
     isLogin: (req, res, next) => {
 
+
         if (req.isLogin) {
             next()
         } else {
