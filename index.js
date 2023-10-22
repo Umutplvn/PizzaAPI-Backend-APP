@@ -35,6 +35,9 @@ dbConnection()
 //Accept JSON - Gelen veriyi objeye cevirir ve req.body ile bize geri verir
 app.use(express.json())
 
+// Access Token Control
+app.use(require('./src/middlewares/authentication'))
+
 //Run Logger:
 app.use(require('./src/middlewares/logger'))        
 

@@ -12,7 +12,7 @@ module.exports = {
             next()
         } else {
             res.errorStatusCode = 403
-            throw new Error('NoPermission: You must login.')
+            throw new Error('No Permission: You must login first.')
         }
     },
 
@@ -22,7 +22,7 @@ module.exports = {
             next()
         } else {
             res.errorStatusCode = 403
-            throw new Error('NoPermission: You must login and to be Admin.')
+            throw new Error('No Permission: You must login and be Admin.')
         }
     },
 }

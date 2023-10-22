@@ -6,20 +6,19 @@
 // app.use(authentication):
 
 const jwt = require('jsonwebtoken')
+module.exports = (req, res, next)=>{
+const auth = req.headers?.authorization // Bearer 12423we2344234...
+const accessToken = auth ? auth.split(' ')[1] : null// ['Bearer','token...' ]
 
-module.exports = (req, res, next) => {
+req.isLogin =false, //bu bir middleware oldugu icin isLogin ve user verileriminde sonraki adima aktarilmasi icin burada degisken olusturdum ve cagirdim
+req.user=null
 
-    const auth = req.headers?.authorization || null
-    const accessToken = auth ? auth.split(' ')[1] : null
+jwt.verify(accessToken, process.env.ACCESS_KEY, function(err, userData){   //sifrelenmis veriyi yani tokeni decode yapiyoruz. accessTokeni al bunu access_key ile cozumle, cozme basariliysa err ver yoksa userData don
 
-    req.isLogin = false
-    req.user = null
-
-    jwt.verify(accessToken, process.env.ACCESS_KEY, function (err, user) {
-        if (!err) {
-            req.isLogin = true
-            req.user = user
-        }
-    })
-    next()
+if(userData && userData.isActive){
+    req.isLogin=true
+    req.user=userData
+}
+})
+next()
 }
